@@ -26,8 +26,24 @@ public class Dealership {
         return applyFilter;
     }
 
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        ArrayList<Vehicle> applyFilter = new ArrayList<>();
+        for (Vehicle v : this.inventory) {
+            if (v.getMake().equalsIgnoreCase(make) || v.getModel().equalsIgnoreCase(model)){
+                applyFilter.add(v);
+            }
+        }
+        return applyFilter;
+    }
+
     public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
-        return null;
+        ArrayList<Vehicle> applyFilter = new ArrayList<>();
+        for(Vehicle v : this.inventory) {
+            if(v.getYear() >= min && v.getYear() <= max) {
+                applyFilter.add(v);
+            }
+        }
+        return applyFilter;
     }
 
     public ArrayList<Vehicle> getVehiclesByColor(String color) {

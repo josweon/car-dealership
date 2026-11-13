@@ -38,7 +38,7 @@ public class UserInterface {
 
             switch(option) {
                 case "1"-> processGetByPriceRequest();
-                case "2"-> System.out.print("processGetByMakeModelRequest()");
+                case "2"-> processGetByMakeModelRequest();
                 case "3"-> System.out.print("processGetByYearRequest()");
                 case "4"-> System.out.print("processGetByColorRequest()");
                 case "5"-> System.out.print("processGetByMileageRequest()");
@@ -89,6 +89,7 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest() {
+        System.out.println("\t[SEARCH] - Price");
         BigDecimal min = BigDecimal.ZERO;
         BigDecimal max = BigDecimal.ZERO;
 
@@ -104,10 +105,43 @@ public class UserInterface {
                 valid = true;
 
             } catch (NumberFormatException nfe) {
-                System.out.println("Not a valid number: " + nfe.getMessage());
+                System.out.println("\tNot a valid number: " + nfe.getMessage());
             }
         } while(!valid);
 
-        displayVehicles(this.dealership.getVehiclesByPrice(min, max));
+        if(this.dealership.getVehiclesByPrice(min, max).isEmpty()){
+            System.out.println("\n\t=* no vehicles found *=\n");
+        } else {
+            displayVehicles(this.dealership.getVehiclesByPrice(min, max));
+        }
+    }
+
+    public void processGetByMakeModelRequest() {
+        System.out.println("\t[SEARCH] - Make & Model");
+        String make = null;
+        String model = null;
+
+        boolean notValid;
+        do {
+
+            System.out.print("\tMake: ");
+            make = scanner.nextLine();
+
+            System.out.print("\tModel: ");
+            model = scanner.nextLine();
+
+            //done: find a better way to implement
+            notValid = make == null || make.isBlank() || model == null || model.isBlank();
+            if (notValid) {
+                System.out.println("\tInput cannot be empty\n");
+            }
+
+        } while(notValid);
+
+        if(this.dealership.getVehiclesByMakeModel(make,model).isEmpty()){
+            System.out.println("\n\t=* no vehicles found *=\n");
+        } else {
+            displayVehicles(this.dealership.getVehiclesByMakeModel(make, model));
+        }
     }
 }
