@@ -17,7 +17,13 @@ public class Dealership {
     }
 
     public ArrayList<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
-        return null;
+        ArrayList<Vehicle> applyFilter = new ArrayList<>();
+        for (Vehicle v : this.inventory) {
+            if (v.getPrice().compareTo(min) >= 0 && v.getPrice().compareTo(max) <= 0) {
+                applyFilter.add(v);
+            }
+        }
+        return applyFilter;
     }
 
     public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {

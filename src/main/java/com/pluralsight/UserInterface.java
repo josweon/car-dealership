@@ -1,10 +1,12 @@
 package com.pluralsight;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     private Dealership dealership;
+    Scanner scanner = new Scanner(System.in);
 
     private void init() {
         this.dealership = DealershipFileManager.getDealership();
@@ -12,7 +14,6 @@ public class UserInterface {
 
     public void display() {
         init();
-        Scanner scanner = new Scanner(System.in);
         String menu = """
                 ==* MENU *==
                 [1] - Find vehicles within a price range\s
@@ -36,7 +37,7 @@ public class UserInterface {
             option = scanner.nextLine().trim();
 
             switch(option) {
-                case "1"-> System.out.print("processGetByPriceRequest()");
+                case "1"-> processGetByPriceRequest();
                 case "2"-> System.out.print("processGetByMakeModelRequest()");
                 case "3"-> System.out.print("processGetByYearRequest()");
                 case "4"-> System.out.print("processGetByColorRequest()");
@@ -85,5 +86,28 @@ public class UserInterface {
     public void processGetAllVehiclesRequest() {
         ArrayList<Vehicle> allVehicles = dealership.getAllVehicles();
         displayVehicles(allVehicles);
+    }
+
+    public void processGetByPriceRequest() {
+        BigDecimal min = BigDecimal.ZERO;
+        BigDecimal max = BigDecimal.ZERO;
+
+        boolean valid = false;
+        do {
+            try {
+                System.out.print("\tMin price: $");
+                min = new BigDecimal(scanner.nextLine());
+
+                System.out.print("\tMax price: $");
+                max = new BigDecimal(scanner.nextLine());
+
+                valid = true;
+
+            } catch (NumberFormatException nfe) {
+                System.out.println("Not a valid number: " + nfe.getMessage());
+            }
+        } while(!valid);
+
+        displayVehicles(this.dealership.getVehiclesByPrice(min, max));
     }
 }
