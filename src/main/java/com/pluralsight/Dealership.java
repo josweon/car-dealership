@@ -2,7 +2,6 @@ package com.pluralsight;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Dealership {
     private String name;
@@ -17,28 +16,28 @@ public class Dealership {
         inventory = new ArrayList<>();
     }
 
-    public List<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
+    public ArrayList<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
         return null;
     }
 
-    public List<Vehicle> getVehiclesByYear(int min, int max) {
+    public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
         return null;
     }
 
-    public List<Vehicle> getVehiclesByColor(String color) {
+    public ArrayList<Vehicle> getVehiclesByColor(String color) {
         return null;
     }
 
-    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+    public ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
         return null;
     }
 
-    public List<Vehicle> getVehiclesByType(String vehicleType) {
+    public ArrayList<Vehicle> getVehiclesByType(String vehicleType) {
         return null;
     }
 
-    public List<Vehicle> getAllVehicles() {
-        return null;
+    public ArrayList<Vehicle> getAllVehicles() {
+        return this.inventory;
     }
 
     public void addVehicle(Vehicle vehicle) {
